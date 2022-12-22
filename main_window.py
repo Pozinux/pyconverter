@@ -76,7 +76,7 @@ class MainWindow(QtWidgets.QWidget):
         images_a_convertir = [1 for lw_item in lw_items if not lw_item.processed]
         if not images_a_convertir:          
             msg_box = QtWidgets.QMessageBox(QtWidgets.QMessageBox.Warning, "Aucune image à convertir", "Toutes les images ont déjà été converties.")
-            msg_box.exec_()
+            msg_box.exec()
             return False
 
         self.thread = QtCore.QThread(self)  # On créé un thread
