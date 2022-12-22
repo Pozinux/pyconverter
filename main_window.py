@@ -18,11 +18,11 @@ class MainWindow(QtWidgets.QWidget):
         self.setup_connections()
 
     def create_widgets(self):
-        self.lbl_quality = QtWidgets.QLabel("Qualité:")
+        self.lbl_quality = QtWidgets.QLabel("Qualité :")
         self.spn_quality = QtWidgets.QSpinBox()
-        self.lbl_size = QtWidgets.QLabel("Taille:")
+        self.lbl_size = QtWidgets.QLabel("Taille :")
         self.spn_size = QtWidgets.QSpinBox()
-        self.lbl_dossierOut = QtWidgets.QLabel("Dossier de sortie:")
+        self.lbl_dossierOut = QtWidgets.QLabel("Dossier de sortie :")
         self.le_dossierOut = QtWidgets.QLineEdit()
         self.lw_files = QtWidgets.QListWidget()
         self.btn_convert = QtWidgets.QPushButton("Conversion")
@@ -89,7 +89,7 @@ class MainWindow(QtWidgets.QWidget):
         self.worker.finished.connect(self.thread.quit)  # Quand le signal finished est émit, on quitte le thread
         self.thread.start()
 
-        self.prg_dialog = QtWidgets.QProgressDialog("Conversion des images", "Annuler...", 1, len(images_a_convertir))
+        self.prg_dialog = QtWidgets.QProgressDialog("Conversion des images", "Annuler...", 1, len(images_a_convertir))  # Est mis à jour par image_converted()
         self.prg_dialog.canceled.connect(self.abort)
         self.prg_dialog.show()
 
@@ -101,7 +101,7 @@ class MainWindow(QtWidgets.QWidget):
         if success:
             lw_item.setIcon(QtGui.QIcon("images/checked.png"))  # Si l'image est convertie, on ajoute un icone ok à l'item de la liste
             lw_item.processed = True  # On met un attribut à True pour dire que l'image a été convertie pour pas qu'on la reconvertisse si on relance (vérifié dans convert_images)
-            self.prg_dialog.setValue(self.prg_dialog.value() + 1)
+            self.prg_dialog.setValue(self.prg_dialog.value() + 1)  # Mise à jour de la barre de progression
 
     def delete_selected_items(self):
         for lw_item in self.lw_files.selectedItems():
