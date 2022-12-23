@@ -90,8 +90,10 @@ class MainWindow(QtWidgets.QWidget):
         self.thread.start()
 
         self.prg_dialog = QtWidgets.QProgressDialog("Conversion des images", "Annuler...", 1, len(images_a_convertir))  # Est mis à jour par image_converted()
+        self.prg_dialog.close()
         self.prg_dialog.canceled.connect(self.abort)
-        self.prg_dialog.show()
+        if len(images_a_convertir) > 1:
+            self.prg_dialog.show()
 
     def abort(self):
         self.worker.runs = False
